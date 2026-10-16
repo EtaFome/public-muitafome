@@ -81,6 +81,53 @@ sem precisar recarregar a página ou o app.
 | Autenticação | JWT |
 | Notificações | Expo Push Notifications |
 
+## Como rodar localmente
+
+Pré-requisitos: Node 20+ e Docker.
+
+```bash
+# 1. Banco (na pasta raiz, onde está o docker-compose.yml)
+docker compose up -d
+
+# 2. API (muitafome-api) — copie .env.example para .env e gere o JWT_ACCESS_SECRET
+npm install && npx prisma migrate deploy && npm run dev      # http://localhost:3333
+
+# 3. Painel (muitafome-web-enterprise)
+npm install && npm run dev                                   # http://localhost:3000
+
+# 4. App (muitafome-mobile-client)
+npm install && npm start                                     # Expo Go, emulador ou web
+
+# 5. Site público (public-muitafome): HTML estático, abra index.html ou sirva a pasta
+```
+
+## Testes
+
+| Onde | Comando | O que cobre |
+|---|---|---|
+| API | `npm test` | 24 testes de integração contra um Postgres real (`muitafome_test`, recriado a cada execução): fluxo do pedido, tempo real, cupons e concorrência, IDOR, webhooks, LGPD |
+| Painel | `npm run test:e2e` | E2E com Playwright: sobe a API (banco `muitafome_e2e`) e o painel em portas próprias e testa cadastro → cardápio → pedido ao vivo → avaliação, recusa com motivo, exportação/exclusão de conta e sessão revogada |
+| API e Painel | CI (`.github/workflows/ci.yml`) | typecheck, testes/build e `npm audit` a cada push/PR |
+
+O app mobile tem `npm run typecheck`. E2E nativo (Detox/Maestro) fica para quando houver build nativo.
+
+## LGPD
+
+- Consentimento registrado no cadastro (data + versão dos termos).
+- Titular vê, corrige, exporta (JSON) e exclui os próprios dados pelo app e pelo painel.
+- Exclusão anonimiza a pessoa e mantém os pedidos só pelo prazo fiscal.
+- Sessões revogadas ao trocar a senha ou excluir a conta.
+- Rotas públicas não expõem CPF/CNPJ, PIX nem dados de clientes; avaliações mostram só o primeiro nome.
+- [Política de Privacidade](privacidade.html) e [Termos de Uso](termos.html).
+
+### Antes de lançar
+
+- [ ] Preencher os campos `[ENTRE COLCHETES]` de `privacidade.html` e `termos.html` (razão social, CNPJ, encarregado, gateway, nuvem) e pedir revisão jurídica.
+- [ ] Integrar o gateway de pagamento e trocar o segredo compartilhado do webhook pela verificação de assinatura do provedor.
+- [ ] Produção: `NODE_ENV=production`, `CORS_ORIGIN`, `TRUST_PROXY`, HTTPS, segredos fortes.
+- [ ] Mais de uma instância da API: rate limit em Redis (hoje fica em memória).
+- [ ] Mover imagens do banco (base64) para um storage (S3/Cloudinary).
+
 ## Documentação
 
 Veja [`ARCHITECTURE.md`](ARCHITECTURE.md) para uma visão geral da arquitetura.
@@ -90,7 +137,6 @@ Veja [`ARCHITECTURE.md`](ARCHITECTURE.md) para uma visão geral da arquitetura.
 Próximos passos planejados:
 
 - Geolocalização (busca de estabelecimentos por proximidade)
-- Upload de imagens do cardápio
 - Integração com gateway de pagamento
 
 ## Licença
