@@ -5,6 +5,11 @@
   document.querySelectorAll("[data-painel]").forEach(function (a) {
     a.href = base + a.getAttribute("data-painel");
   });
+  // Cliente web: localhost:3001 em desenvolvimento, subdomínio "app" em produção.
+  var app = local ? "http://localhost:3001" : location.protocol + "//app." + location.hostname.replace(/^www\./, "");
+  document.querySelectorAll("[data-app]").forEach(function (a) {
+    a.href = app + a.getAttribute("data-app");
+  });
   document.querySelectorAll("[data-ano]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
   });
