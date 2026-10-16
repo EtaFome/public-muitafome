@@ -95,10 +95,13 @@ npm install && npx prisma migrate deploy && npm run dev      # http://localhost:
 # 3. Painel (muitafome-web-enterprise)
 npm install && npm run dev                                   # http://localhost:3000
 
-# 4. App (muitafome-mobile-client)
+# 4. Cliente web (muitafome-web-client) — alternativa ao app, sem loja de apps
+npm install && npm run dev                                   # http://localhost:3001
+
+# 5. App (muitafome-mobile-client)
 npm install && npm start                                     # Expo Go, emulador ou web
 
-# 5. Site público (public-muitafome): HTML estático, abra index.html ou sirva a pasta
+# 6. Site público (public-muitafome): HTML estático, abra index.html ou sirva a pasta
 #    index.html (escolha) → para-estabelecimentos.html (contratação) | para-clientes.html (app)
 ```
 
@@ -108,6 +111,7 @@ npm install && npm start                                     # Expo Go, emulador
 |---|---|---|
 | API | `npm test` | 35 testes de integração contra um Postgres real (`muitafome_test`, recriado a cada execução): fluxo do pedido, tempo real, cupons e concorrência, IDOR, webhooks, LGPD, horário, raio de entrega, equipe, administração, imagens e expiração de pedidos |
 | Painel | `npm run test:e2e` | 7 E2E com Playwright: sobe a API (banco `muitafome_e2e`) e o painel em portas próprias; cadastro → cardápio → pedido ao vivo → avaliação, recusa com motivo, LGPD, sessão revogada, equipe, horário e administração |
+| Cliente web | `npm run test:e2e` | 5 E2E com Playwright no celular e no desktop contra a API real (build de produção): pedido completo de visitante a avaliação, cancelamento, LGPD, login/sessão e nenhuma página com rolagem horizontal em 360 px |
 | App | `npm run test:e2e` | 3 E2E com Playwright no build web do app (celular emulado) contra a API real: cadastro com consentimento, pedido com cupom e observação acompanhado ao vivo até a avaliação, cancelamento e exclusão de conta |
 | Os três | CI (`.github/workflows/ci.yml`) | typecheck, testes, build, E2E e `npm audit` a cada push/PR. O E2E do painel e do app faz checkout da API: com o repositório privado, crie o secret `API_REPO_TOKEN` |
 
