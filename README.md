@@ -105,11 +105,12 @@ npm install && npm start                                     # Expo Go, emulador
 
 | Onde | Comando | O que cobre |
 |---|---|---|
-| API | `npm test` | 24 testes de integração contra um Postgres real (`muitafome_test`, recriado a cada execução): fluxo do pedido, tempo real, cupons e concorrência, IDOR, webhooks, LGPD |
-| Painel | `npm run test:e2e` | E2E com Playwright: sobe a API (banco `muitafome_e2e`) e o painel em portas próprias e testa cadastro → cardápio → pedido ao vivo → avaliação, recusa com motivo, exportação/exclusão de conta e sessão revogada |
-| API e Painel | CI (`.github/workflows/ci.yml`) | typecheck, testes/build e `npm audit` a cada push/PR |
+| API | `npm test` | 35 testes de integração contra um Postgres real (`muitafome_test`, recriado a cada execução): fluxo do pedido, tempo real, cupons e concorrência, IDOR, webhooks, LGPD, horário, raio de entrega, equipe, administração, imagens e expiração de pedidos |
+| Painel | `npm run test:e2e` | 7 E2E com Playwright: sobe a API (banco `muitafome_e2e`) e o painel em portas próprias; cadastro → cardápio → pedido ao vivo → avaliação, recusa com motivo, LGPD, sessão revogada, equipe, horário e administração |
+| App | `npm run test:e2e` | 3 E2E com Playwright no build web do app (celular emulado) contra a API real: cadastro com consentimento, pedido com cupom e observação acompanhado ao vivo até a avaliação, cancelamento e exclusão de conta |
+| Os três | CI (`.github/workflows/ci.yml`) | typecheck, testes, build, E2E e `npm audit` a cada push/PR. O E2E do painel e do app faz checkout da API: com o repositório privado, crie o secret `API_REPO_TOKEN` |
 
-O app mobile tem `npm run typecheck`. E2E nativo (Detox/Maestro) fica para quando houver build nativo.
+Gestos e push nativos não são cobertos pelo E2E web; para isso, Maestro/Detox com o build nativo.
 
 ## LGPD
 
@@ -120,13 +121,23 @@ O app mobile tem `npm run typecheck`. E2E nativo (Detox/Maestro) fica para quand
 - Rotas públicas não expõem CPF/CNPJ, PIX nem dados de clientes; avaliações mostram só o primeiro nome.
 - [Política de Privacidade](privacidade.html) e [Termos de Uso](termos.html).
 
+## Operação
+
+- **Administração:** `npm run make-admin -- email@exemplo.com` (na API) promove uma conta existente; ao entrar no painel ela vai para `/admin` (métricas, suspender lojas, moderar avaliações).
+- **Equipe:** o dono adiciona funcionários em *Equipe*; eles atendem pedidos sem acesso a cardápio, cupons, dados fiscais e equipe.
+- **Horário e área de entrega:** em *Configurações*. Endereços são geocodificados pelo OpenStreetMap (Nominatim); a lista do app esconde lojas que não entregam no endereço do cliente.
+- **Manutenção automática:** pedido não pago em 30 min é cancelado e devolve o uso do cupom.
+- **Deploy num servidor:** `muitafome-api/deploy/docker-compose.prod.yml` sobe Postgres, Redis, API, painel e site com HTTPS automático (Caddy) e backup diário do banco (14 dias). Imagens Docker da API e do painel nos próprios repositórios.
+- **Logs:** em produção, uma linha JSON por requisição com `X-Request-Id`; `/health` confere o banco.
+- **Publicar o app:** `eas.json` já tem os perfis `development`, `preview` (APK interno) e `production`. Rode `eas build -p android --profile production` e `eas submit`.
+
 ### Antes de lançar
 
 - [ ] Preencher os campos `[ENTRE COLCHETES]` de `privacidade.html` e `termos.html` (razão social, CNPJ, encarregado, gateway, nuvem) e pedir revisão jurídica.
-- [ ] Integrar o gateway de pagamento e trocar o segredo compartilhado do webhook pela verificação de assinatura do provedor.
-- [ ] Produção: `NODE_ENV=production`, `CORS_ORIGIN`, `TRUST_PROXY`, HTTPS, segredos fortes.
-- [ ] Mais de uma instância da API: rate limit em Redis (hoje fica em memória).
-- [ ] Mover imagens do banco (base64) para um storage (S3/Cloudinary).
+- [ ] Integrar o gateway de pagamento (checkout, assinatura, estorno) e trocar o segredo do webhook pela verificação de assinatura do provedor.
+- [ ] Contratar o servidor/nuvem, apontar o DNS e preencher `deploy/.env.prod`.
+- [ ] Contas Apple Developer e Google Play, `eas init` (projectId) e credenciais de push (APNs/FCM); trocar as URLs de `eas.json` pelos domínios reais.
+- [ ] Opcional: Sentry (ou similar) para alertas de erro; storage S3/R2 quando o volume de imagens pesar no banco.
 
 ## Documentação
 
@@ -136,7 +147,6 @@ Veja [`ARCHITECTURE.md`](ARCHITECTURE.md) para uma visão geral da arquitetura.
 
 Próximos passos planejados:
 
-- Geolocalização (busca de estabelecimentos por proximidade)
 - Integração com gateway de pagamento
 
 ## Licença
