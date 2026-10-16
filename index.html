@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muita Fome: peça comida perto de você</title>
+  <meta name="description" content="Peça de restaurantes e lanchonetes perto de você e acompanhe o pedido ao vivo. Tem um estabelecimento? Venda pelo Muita Fome com fila de pedidos em tempo real." />
+  <meta name="theme-color" content="#2B1E1C" />
+  <meta property="og:title" content="Muita Fome" />
+  <meta property="og:description" content="Peça comida perto de você e acompanhe ao vivo." />
+  <meta property="og:image" content="assets/social-preview.png" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./"><img src="assets/icon-192.png" alt="" width="36" height="36" />Muita Fome</a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#para-lojas">Para lojas</a>
+        <a href="#duvidas">Dúvidas</a>
+        <a class="pill" data-painel="/login" href="https://painel.muitafome.com.br/login">Entrar no painel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div>
+          <span class="eyebrow">Delivery de restaurantes e lanchonetes</span>
+          <h1 id="hero-title">Bateu a fome?<br /><em>Muita Fome</em> resolve.</h1>
+          <p class="lead">Escolha a loja, monte o pedido do seu jeito e acompanhe cada passo ao vivo, do preparo até a sua porta.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#baixar">Baixar o app</a>
+            <a class="btn btn-ghost" href="#para-lojas">Tenho um estabelecimento</a>
+          </div>
+        </div>
+
+        <!-- Comanda ilustrativa: o mesmo visual da tela "Acompanhar pedido" do app. -->
+        <div class="ticket" role="img" aria-label="Exemplo de pedido número 4F2A9C, em preparo">
+          <div class="ticket-head">
+            <span class="ticket-number">#4F2A9C</span>
+            <span class="ticket-store">Lanchonete da Praça</span>
+          </div>
+          <p class="ticket-status">Seu pedido está sendo preparado</p>
+          <ul class="steps">
+            <li class="done" style="--c: var(--st-received)">Recebido</li>
+            <li class="done now" style="--c: var(--st-preparing)">Em preparo</li>
+            <li>Saiu para entrega</li>
+            <li>Concluído</li>
+          </ul>
+          <div class="dashed"></div>
+          <div class="ticket-line"><b>2x</b><span>X-Burger · Grande</span></div>
+          <div class="ticket-line"><b>1x</b><span>Batata frita</span></div>
+          <div class="dashed"></div>
+          <div class="ticket-total"><span>Total</span><span>R$ 62,90</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" aria-labelledby="como-title">
+      <div class="wrap">
+        <h2 class="section-title" id="como-title">Do pedido à porta, sem mistério</h2>
+        <p class="section-lead">Você vê o status mudar na hora: nada de ficar ligando para a loja para saber onde está a comida.</p>
+        <ol class="how">
+          <li style="--c: var(--st-received)"><h3>Escolha</h3><p>Busque por nome ou categoria e veja quem está aberto agora.</p></li>
+          <li style="--c: var(--st-preparing)"><h3>Personalize</h3><p>Tamanho, adicionais, observações e cupom de desconto.</p></li>
+          <li style="--c: var(--st-delivery)"><h3>Acompanhe</h3><p>A loja aceita e você recebe cada atualização em tempo real.</p></li>
+          <li style="--c: var(--st-completed)"><h3>Avalie</h3><p>Conte como foi e ajude outras pessoas a escolher.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="para-lojas" aria-labelledby="lojas-title">
+      <div class="wrap">
+        <h2 class="section-title" id="lojas-title">Um app para quem pede, um painel para quem cozinha</h2>
+        <p class="section-lead">O cliente pede pelo celular. A sua equipe recebe a comanda no navegador do balcão, sem instalar nada.</p>
+        <div class="split">
+          <div class="panel" id="baixar">
+            <h3>Para clientes</h3>
+            <p class="who">App para Android e iPhone</p>
+            <ul class="checks">
+              <li>Lojas abertas perto de você, com nota dos clientes</li>
+              <li>Pedido personalizado e cupom de desconto</li>
+              <li>Status ao vivo e notificação a cada passo</li>
+              <li>Histórico com “pedir de novo”</li>
+            </ul>
+            <p class="muted" style="margin:0">Em breve na App Store e no Google Play.</p>
+          </div>
+          <div class="panel">
+            <h3>Para estabelecimentos</h3>
+            <p class="who">Painel web, no computador ou tablet</p>
+            <ul class="checks">
+              <li>Fila de pedidos em tempo real, separada por etapa</li>
+              <li>Cardápio com fotos, ingredientes, tamanhos e adicionais</li>
+              <li>Cupons, taxa de entrega e loja aberta/fechada num clique</li>
+              <li>Cadastro sozinho: a loja entra no ar quando a assinatura é confirmada</li>
+            </ul>
+            <a class="btn btn-primary" data-painel="/cadastro" href="https://painel.muitafome.com.br/cadastro">Cadastrar minha loja</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark" aria-labelledby="dados-title">
+      <div class="wrap">
+        <h2 class="section-title" id="dados-title">Seus dados, do seu jeito</h2>
+        <p class="section-lead">Seguimos a Lei Geral de Proteção de Dados (LGPD). Pedimos só o necessário para o pedido chegar.</p>
+        <div class="trust">
+          <div><h3>Você no controle</h3><p>Baixe uma cópia dos seus dados ou exclua sua conta direto pelo app ou pelo painel, sem precisar pedir para ninguém.</p></div>
+          <div><h3>Só o necessário</h3><p>A loja vê seu nome, telefone e endereço apenas para preparar e entregar o pedido. Nada de venda de dados.</p></div>
+          <div><h3>Protegido</h3><p>Senhas criptografadas, conexão segura e sessões encerradas quando você troca a senha.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="duvidas" class="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <h2 class="section-title" id="faq-title">Dúvidas frequentes</h2>
+        <details><summary>Quanto custa para o cliente?</summary><p>Baixar e usar o app é grátis. Você paga só o pedido e a taxa de entrega definida pela loja, que aparece antes de confirmar.</p></details>
+        <details><summary>Posso cancelar um pedido?</summary><p>Sim, enquanto a loja ainda não aceitou. Depois que o preparo começa, só a loja pode cancelar, sempre informando o motivo.</p></details>
+        <details><summary>Como minha loja aparece no app?</summary><p>Cadastre a loja no painel e confirme a assinatura mensal. Assim que o pagamento é confirmado, a loja entra no ar automaticamente.</p></details>
+        <details><summary>Preciso de equipamento especial na loja?</summary><p>Não. Qualquer computador ou tablet com navegador recebe os pedidos em tempo real.</p></details>
+        <details><summary>Como excluo minha conta e meus dados?</summary><p>No app, em <strong>Minha conta → Excluir conta</strong>. No painel, em <strong>Minha conta</strong>. Veja os detalhes na <a href="privacidade.html">Política de Privacidade</a>.</p></details>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="wrap">
+        <h2 id="cta-title">Sua cozinha merece mais pedidos</h2>
+        <p>Cadastre o estabelecimento em poucos minutos.</p>
+        <a class="btn btn-primary" data-painel="/cadastro" href="https://painel.muitafome.com.br/cadastro">Começar agora</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© <span id="ano">2026</span> Muita Fome</span>
+      <nav aria-label="Legal">
+        <a href="termos.html">Termos de Uso</a>
+        <a href="privacidade.html">Política de Privacidade</a>
+        <a href="mailto:privacidade@muitafome.com.br">Encarregado de dados (DPO)</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Links do painel: em desenvolvimento apontam para o Next local; em produção, para o subdomínio "painel".
+    (function () {
+      var local = location.protocol === "file:" || location.hostname === "localhost" || location.hostname === "127.0.0.1";
+      var base = local ? "http://localhost:3000" : location.protocol + "//painel." + location.hostname.replace(/^www\./, "");
+      document.querySelectorAll("[data-painel]").forEach(function (a) { a.href = base + a.getAttribute("data-painel"); });
+      document.getElementById("ano").textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
