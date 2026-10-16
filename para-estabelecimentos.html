@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Venda pelo Muita Fome · Para estabelecimentos</title>
+  <meta name="description" content="Receba pedidos de delivery em tempo real, monte o cardápio e entre no ar em minutos. Assinatura mensal, sem fidelidade." />
+  <meta name="theme-color" content="#2B1E1C" />
+  <meta property="og:title" content="Venda pelo Muita Fome" />
+  <meta property="og:description" content="Fila de pedidos em tempo real, cardápio completo e loja no ar em minutos." />
+  <meta property="og:image" content="assets/social-preview.png" />
+  <link rel="icon" type="image/png" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./"><img src="assets/icon-192.png" alt="" width="36" height="36" />Muita Fome</a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="#como-contratar">Como contratar</a>
+        <a href="#plano">Plano</a>
+        <a href="#duvidas">Dúvidas</a>
+        <a class="pill" data-painel="/login" href="https://painel.muitafome.com.br/login">Entrar no painel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div>
+          <span class="eyebrow">Para restaurantes, lanchonetes e pizzarias</span>
+          <h1 id="hero-title">Sua cozinha recebendo <em>pedidos</em> em tempo real.</h1>
+          <p class="lead">O cliente pede pelo app e a comanda aparece na hora no navegador do seu balcão. Sem instalar nada e sem dar F5.</p>
+          <div class="actions">
+            <a class="btn btn-primary" data-painel="/cadastro" href="https://painel.muitafome.com.br/cadastro">Cadastrar minha loja</a>
+            <a class="btn btn-ghost" href="#como-contratar">Ver como funciona</a>
+          </div>
+        </div>
+
+        <!-- Fila ilustrativa: o mesmo visual do painel real. -->
+        <div class="mock-panel" role="img" aria-label="Exemplo do painel: dois pedidos recebidos esperando a loja aceitar">
+          <div class="bar">Pedidos <span>● Loja aberta</span></div>
+          <div class="mock-tabs"><b class="on">Recebido 2</b><b>Em preparo 3</b><b>Saiu para entrega 1</b></div>
+          <div class="mock-orders">
+            <div class="mock-order" style="--c: var(--st-received)">
+              <div class="row"><strong>#4F2A9C</strong><span class="muted">agora</span></div>
+              <div>2x X-Burger · Grande · 1x Batata</div>
+              <div class="row" style="margin-top:6px"><b>R$ 62,90</b><span class="accept">Aceitar pedido</span></div>
+            </div>
+            <div class="mock-order" style="--c: var(--st-received)">
+              <div class="row"><strong>#8B1D07</strong><span class="muted">há 2 min</span></div>
+              <div>1x Pizza Calabresa · Obs.: sem cebola</div>
+              <div class="row" style="margin-top:6px"><b>R$ 48,00</b><span class="accept">Aceitar pedido</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="beneficios-title">
+      <div class="wrap">
+        <h2 class="section-title" id="beneficios-title">Tudo o que o balcão precisa</h2>
+        <p class="section-lead">Feito para quem opera a cozinha na correria: botões grandes, aviso sonoro e nada de tela travada.</p>
+        <div class="benefits">
+          <div class="panel"><h3>Fila ao vivo</h3><p>Pedido pago aparece na hora, com aviso sonoro, separado por etapa: recebido, em preparo, saiu para entrega e concluído.</p></div>
+          <div class="panel"><h3>Cardápio completo</h3><p>Fotos, ingredientes, tamanhos e adicionais com preço próprio. Marque um item como esgotado com um clique.</p></div>
+          <div class="panel"><h3>Horário e área de entrega</h3><p>A loja abre e fecha sozinha no horário definido e só recebe pedidos de quem está dentro do seu raio.</p></div>
+          <div class="panel"><h3>Cupons de desconto</h3><p>Percentual ou valor fixo, com validade e limite de usos para controlar a promoção.</p></div>
+          <div class="panel"><h3>Equipe no painel</h3><p>Quem trabalha no balcão entra com a própria conta e atende pedidos, sem mexer no cardápio nem nos seus dados.</p></div>
+          <div class="panel"><h3>Avaliações</h3><p>Veja a nota dos clientes e o que eles acharam de cada pedido concluído.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-contratar" aria-labelledby="contratar-title">
+      <div class="wrap">
+        <h2 class="section-title" id="contratar-title">Como contratar</h2>
+        <p class="section-lead">Tudo pelo painel, sem falar com vendedor. Leva poucos minutos.</p>
+        <ol class="how">
+          <li style="--c: var(--st-received)"><h3>Crie sua conta</h3><p>Nome, e-mail e senha. Se você já usa o app como cliente, entre com a mesma conta.</p></li>
+          <li style="--c: var(--st-preparing)"><h3>Cadastre a loja</h3><p>Nome, CPF ou CNPJ, telefone, endereço e a chave PIX para receber os repasses.</p></li>
+          <li style="--c: var(--st-delivery)"><h3>Confirme a assinatura</h3><p>Assim que o pagamento é confirmado, a loja entra no ar sozinha, sem aprovação manual.</p></li>
+          <li style="--c: var(--st-completed)"><h3>Monte o cardápio</h3><p>Adicione categorias e itens, abra a loja e comece a receber pedidos.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="plano" aria-labelledby="plano-title">
+      <div class="wrap">
+        <h2 class="section-title" id="plano-title" style="text-align:center">Um plano, tudo incluído</h2>
+        <p class="section-lead" style="text-align:center; margin-left:auto; margin-right:auto">Sem fidelidade: cancele quando quiser pelo próprio painel.</p>
+        <div class="panel plan">
+          <h3>Plano mensal</h3>
+          <!-- Antes de lançar: troque pelo valor real da assinatura. -->
+          <p class="price">R$ [VALOR] <small>/mês</small></p>
+          <p class="muted" style="margin-top:0">por estabelecimento</p>
+          <ul class="checks">
+            <li>Pedidos ilimitados em tempo real</li>
+            <li>Cardápio com fotos, tamanhos e adicionais</li>
+            <li>Cupons, horário automático e raio de entrega</li>
+            <li>Equipe com acesso ao painel</li>
+            <li>Repasse dos pedidos pagos pela chave PIX</li>
+          </ul>
+          <a class="btn btn-primary" style="width:100%" data-painel="/cadastro" href="https://painel.muitafome.com.br/cadastro">Cadastrar minha loja</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="duvidas" class="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <h2 class="section-title" id="faq-title">Dúvidas de quem vai vender</h2>
+        <details><summary>Preciso de equipamento especial?</summary><p>Não. Qualquer computador ou tablet com navegador recebe os pedidos em tempo real.</p></details>
+        <details><summary>Quando minha loja aparece no app?</summary><p>Logo depois que o pagamento da assinatura é confirmado. Ela sai do ar sozinha se a assinatura atrasar ou for cancelada.</p></details>
+        <details><summary>O pedido chega antes de o cliente pagar?</summary><p>Não. A comanda só aparece na fila depois que o pagamento é confirmado, então você não prepara pedido sem garantia.</p></details>
+        <details><summary>Posso recusar um pedido?</summary><p>Sim, informando o motivo (item em falta, loja sobrecarregada, fora da área). O cliente vê o motivo no app.</p></details>
+        <details><summary>Como recebo o dinheiro dos pedidos?</summary><p>Os pedidos pagos pela plataforma são repassados para a chave PIX cadastrada no painel.</p></details>
+        <details><summary>E os dados dos clientes?</summary><p>Você recebe nome, telefone e endereço só para preparar e entregar o pedido, conforme a LGPD. Veja os <a href="termos.html">Termos de Uso</a>.</p></details>
+        <details><summary>Tem fidelidade?</summary><p>Não. Cancele a assinatura quando quiser pelo painel.</p></details>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="wrap">
+        <h2 id="cta-title">Sua cozinha merece mais pedidos</h2>
+        <p>Cadastre o estabelecimento em poucos minutos.</p>
+        <a class="btn btn-primary" data-painel="/cadastro" href="https://painel.muitafome.com.br/cadastro">Começar agora</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© <span data-ano>2026</span> Muita Fome · <a href="para-clientes.html">Quer pedir comida? Conheça o app</a></span>
+      <nav aria-label="Legal">
+        <a href="termos.html">Termos de Uso</a>
+        <a href="privacidade.html">Política de Privacidade</a>
+        <a href="mailto:privacidade@muitafome.com.br">Encarregado de dados (DPO)</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="assets/site.js"></script>
+</body>
+</html>
