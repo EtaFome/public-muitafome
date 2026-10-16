@@ -148,3 +148,49 @@ section { padding: 56px 0; }
 .legal th { background: var(--counter); }
 .table-scroll { overflow-x: auto; }
 .notice { background: #fff6d6; border-left: 4px solid var(--st-received); padding: 12px 16px; border-radius: 6px; }
+
+/* ---------- página inicial: escolha do caminho ---------- */
+.home { min-height: calc(100vh - 64px - 90px); display: flex; align-items: center; padding: 56px 0; }
+.home .wrap { width: 100%; }
+.home h1 { font-size: clamp(38px, 6vw, 64px); font-weight: 800; text-align: center; }
+.home h1 em { font-style: normal; color: var(--red); }
+.home .lead { text-align: center; color: var(--ink-soft); font-size: 19px; margin: 16px auto 40px; max-width: 46ch; }
+.paths { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 880px; margin: 0 auto; }
+@media (max-width: 720px) { .paths { grid-template-columns: 1fr; } }
+.path {
+  display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-top: 6px solid var(--c);
+  border-radius: 4px 4px var(--radius) var(--radius); padding: 28px; transition: transform 0.15s, box-shadow 0.15s;
+}
+.path:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(43, 30, 28, 0.12); }
+@media (prefers-reduced-motion: reduce) { .path, .path:hover { transition: none; transform: none; } }
+.path .who { font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-size: 13px; }
+.path h2 { font-size: 28px; }
+.path p { margin: 0; color: var(--ink-soft); }
+.path .btn { margin-top: auto; align-self: flex-start; }
+.path:hover .btn-primary { background: var(--red-dark); }
+
+/* ---------- página de contratação ---------- */
+.benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) { .benefits { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .benefits { grid-template-columns: 1fr; } }
+.benefits .panel h3 { font-size: 19px; margin-bottom: 6px; }
+.benefits .panel p { margin: 0; color: var(--ink-soft); }
+
+.plan { max-width: 460px; margin: 0 auto; text-align: center; border-top: 6px solid var(--red); border-radius: 4px 4px var(--radius) var(--radius); }
+.plan .price { font-family: var(--brand); font-size: 52px; font-weight: 800; line-height: 1; margin: 14px 0 4px; }
+.plan .price small { font-size: 18px; color: var(--ink-soft); font-weight: 700; }
+.plan .checks { text-align: left; }
+
+/* Painel ilustrativo da fila de pedidos (mesmo visual do painel real). */
+.mock-panel { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; max-width: 420px; justify-self: center; width: 100%; }
+.mock-panel .bar { background: var(--ink); color: #fff; padding: 10px 14px; font-weight: 700; display: flex; justify-content: space-between; }
+.mock-panel .bar span { color: #8fd19e; font-size: 13px; }
+.mock-tabs { display: flex; gap: 6px; padding: 12px 14px 0; flex-wrap: wrap; }
+.mock-tabs b { background: var(--counter); border-radius: 999px; padding: 4px 10px; font-size: 13px; }
+.mock-tabs b.on { background: var(--ink); color: #fff; }
+.mock-orders { display: grid; gap: 10px; padding: 14px; }
+.mock-order { border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 4px; padding: 10px 12px; font-size: 14px; }
+.mock-order strong { font-family: var(--brand); font-size: 18px; }
+.mock-order .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.mock-order .accept { background: var(--red); color: #fff; border-radius: 6px; padding: 4px 10px; font-weight: 700; font-size: 13px; }

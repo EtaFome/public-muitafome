@@ -99,6 +99,7 @@ npm install && npm run dev                                   # http://localhost:
 npm install && npm start                                     # Expo Go, emulador ou web
 
 # 5. Site público (public-muitafome): HTML estático, abra index.html ou sirva a pasta
+#    index.html (escolha) → para-estabelecimentos.html (contratação) | para-clientes.html (app)
 ```
 
 ## Testes
@@ -133,6 +134,7 @@ Gestos e push nativos não são cobertos pelo E2E web; para isso, Maestro/Detox 
 
 ### Antes de lançar
 
+- [ ] Definir o preço da assinatura em `para-estabelecimentos.html` (hoje `R$ [VALOR]`).
 - [ ] Preencher os campos `[ENTRE COLCHETES]` de `privacidade.html` e `termos.html` (razão social, CNPJ, encarregado, gateway, nuvem) e pedir revisão jurídica.
 - [ ] Integrar o gateway de pagamento (checkout, assinatura, estorno) e trocar o segredo do webhook pela verificação de assinatura do provedor.
 - [ ] Contratar o servidor/nuvem, apontar o DNS e preencher `deploy/.env.prod`.
