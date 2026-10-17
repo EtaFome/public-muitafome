@@ -101,21 +101,35 @@ npm install && npm run dev                                   # http://localhost:
 # 5. App (muitafome-mobile-client)
 npm install && npm start                                     # Expo Go, emulador ou web
 
-# 6. Site público (public-muitafome): HTML estático, abra index.html ou sirva a pasta
+# 6. Site público (public-muitafome): HTML estático, abra index.html ou sirva a pasta (testes: npm install && npm run test:e2e)
 #    index.html (escolha) → para-estabelecimentos.html (contratação) | para-clientes.html (app)
 ```
 
+## Fluxo de trabalho (branches)
+
+Todos os repositórios seguem o mesmo fluxo:
+
+```
+feature/minha-mudanca ──PR──▶ dev (homologação) ──PR──▶ main (produção)
+                               CI roda tudo           CI roda de novo
+```
+
+- **`dev`:** branch padrão. Toda mudança entra aqui por PR, e o CI roda os testes a cada push e PR.
+- **`main`:** o que está em produção. Só recebe PR vindo da `dev`, depois de o CI passar.
+- **E2E por ambiente:** os E2E do painel, do app e do cliente web baixam a API da mesma branch (PR para `main` testa contra a API de `main`).
+- **Proteção da `main`:** ligada neste repositório, que é público. Nos privados, a regra é de processo: o plano gratuito do GitHub não protege branch de repositório privado; com o plano Team dá para travar.
+
 ## Testes
 
-| Onde | Comando | O que cobre |
+| Repositório | Unitários (`npm test` / `npm run test:unit`) | E2E (`npm run test:e2e`) |
 |---|---|---|
-| API | `npm test` | 35 testes de integração contra um Postgres real (`muitafome_test`, recriado a cada execução): fluxo do pedido, tempo real, cupons e concorrência, IDOR, webhooks, LGPD, horário, raio de entrega, equipe, administração, imagens e expiração de pedidos |
-| Painel | `npm run test:e2e` | 7 E2E com Playwright: sobe a API (banco `muitafome_e2e`) e o painel em portas próprias; cadastro → cardápio → pedido ao vivo → avaliação, recusa com motivo, LGPD, sessão revogada, equipe, horário e administração |
-| Cliente web | `npm run test:e2e` | 5 E2E com Playwright no celular e no desktop contra a API real (build de produção): pedido completo de visitante a avaliação, cancelamento, LGPD, login/sessão e nenhuma página com rolagem horizontal em 360 px |
-| App | `npm run test:e2e` | 3 E2E com Playwright no build web do app (celular emulado) contra a API real: cadastro com consentimento, pedido com cupom e observação acompanhado ao vivo até a avaliação, cancelamento e exclusão de conta |
-| Os três | CI (`.github/workflows/ci.yml`) | typecheck, testes, build, E2E e `npm audit` a cada push/PR. O E2E do painel e do app faz checkout da API: com o repositório privado, crie o secret `API_REPO_TOKEN` |
+| API | 33 (regras de negócio e segurança, sem banco) + 62 de integração com Postgres real | — |
+| Painel | 15 (máscaras, erros, horário, status) | 11 cenários: pedido ao vivo, cardápio completo, cupons, configurações, senha, equipe, horário, administração, LGPD |
+| Cliente web | 11 (carrinho, cupom, navegação, máscaras) | 9 cenários, no celular e no desktop, incluindo 12 páginas sem rolagem lateral em 360 px |
+| App | 8 (carrinho, cupom, erros) | 7 cenários no build web do app |
+| Site público | — | 7 cenários, no celular e no desktop: caminhos da página inicial, links quebrados, responsividade, páginas legais |
 
-Gestos e push nativos não são cobertos pelo E2E web; para isso, Maestro/Detox com o build nativo.
+Cada repositório tem no README a tabela "arquivo → o que cobre". O CI de todos roda em PR e em push na `dev` e na `main`.
 
 ## LGPD
 
