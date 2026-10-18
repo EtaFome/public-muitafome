@@ -119,7 +119,8 @@ feature/minha-mudanca ──PR──▶ dev (homologação) ──PR──▶ ma
 
 - **`dev`:** branch padrão. Toda mudança entra aqui por PR, e o CI roda os testes a cada push e PR.
 - **`main`:** o que está em produção. Só recebe PR vindo da `dev`, depois de o CI passar.
-- **E2E por ambiente:** os E2E do painel, do app e do cliente web baixam a API da mesma branch (PR para `main` testa contra a API de `main`).
+- **Versões da API:** cada merge na `main` da API (CI verde) vira uma versão (`feat:` → 1.3.0, `fix:` → 1.2.1) com imagem em `ghcr.io/etafome/muitafome-api`. Os frontends não dependem das branches da API: o E2E de cada um sobe a imagem da versão do arquivo `api-version`. Para um front usar algo novo, a API sai primeiro e o front sobe o `api-version`.
+- **Compatibilidade da API:** mudanças aditivas e com valor padrão, para front antigo continuar funcionando; remover ou renomear campo leva duas versões (marca como obsoleto, depois remove).
 - **Proteção da `main`:** ligada neste repositório, que é público. Nos privados, a regra é de processo: o plano gratuito do GitHub não protege branch de repositório privado; com o plano Team dá para travar.
 
 ## Testes
