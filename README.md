@@ -40,6 +40,8 @@ assinatura mensal é confirmada — sem depender de um time comercial para aprov
 - Busca e filtro de estabelecimentos por nome/categoria, com indicação de loja aberta/fechada
 - Cardápio com categorias, itens, opções/variações (ex: tamanho, adicionais) e preço por escolha
 - Carrinho, endereço de entrega e cupom de desconto (percentual ou valor fixo)
+- Pagamento direto para a loja na entrega ou na retirada: dinheiro (com troco), cartão na maquininha ou PIX
+- Retirada no balcão, sem taxa de entrega, nas lojas que aceitam
 - Acompanhamento do pedido em tempo real (recebido → em preparo → saiu para entrega → concluído)
 - Histórico de pedidos com "pedir de novo"
 - Avaliação (nota + comentário) depois do pedido concluído
@@ -50,7 +52,8 @@ assinatura mensal é confirmada — sem depender de um time comercial para aprov
 - Fila de pedidos em tempo real, separada por categoria (Recebido, Em preparo, Saiu para
   entrega, Concluído)
 - Aceitar ou recusar pedido com motivo; cancelamento com motivo dos dois lados
-- Pedido só chega na fila da loja depois que o pagamento é confirmado
+- Pedido pago na entrega/retirada chega na fila na hora, com o que cobrar e o troco; pedido pago pelo app só chega depois que o pagamento é confirmado
+- Retirada no balcão opcional (liga em Configurações)
 - Gestão de cardápio (categorias, itens, disponibilidade, opções/variações)
 - Cupons de desconto e taxa de entrega configurável
 - Abrir/fechar a loja manualmente (cliente não consegue pedir de loja fechada)
@@ -123,10 +126,10 @@ feature/minha-mudanca ──PR──▶ dev (homologação) ──PR──▶ ma
 
 | Repositório | Unitários (`npm test` / `npm run test:unit`) | E2E (`npm run test:e2e`) |
 |---|---|---|
-| API | 33 (regras de negócio e segurança, sem banco) + 62 de integração com Postgres real | — |
-| Painel | 15 (máscaras, erros, horário, status) | 11 cenários: pedido ao vivo, cardápio completo, cupons, configurações, senha, equipe, horário, administração, LGPD |
-| Cliente web | 11 (carrinho, cupom, navegação, máscaras) | 9 cenários, no celular e no desktop, incluindo 12 páginas sem rolagem lateral em 360 px |
-| App | 8 (carrinho, cupom, erros) | 7 cenários no build web do app |
+| API | 48 (regras de negócio e segurança, sem banco) + 77 de integração com Postgres real | — |
+| Painel | 15 (máscaras, erros, horário, status) | 15 cenários: pedido ao vivo, cardápio completo, cupons, configurações, senha, equipe, horário, administração, retirada paga na hora, segurança, LGPD |
+| Cliente web | 11 (carrinho, cupom, navegação, máscaras) | 13 cenários, no celular e no desktop, incluindo pagamento na entrega, retirada e 12 páginas sem rolagem lateral em 360 px |
+| App | 8 (carrinho, cupom, erros) | 8 cenários no build web do app, incluindo pagamento na entrega e retirada |
 | Site público | — | 7 cenários, no celular e no desktop: caminhos da página inicial, links quebrados, responsividade, páginas legais |
 
 Cada repositório tem no README a tabela "arquivo → o que cobre". O CI de todos roda em PR e em push na `dev` e na `main`.
