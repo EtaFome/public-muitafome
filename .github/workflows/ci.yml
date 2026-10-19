@@ -1,0 +1,19 @@
+name: CI
+
+# dev = homologação (tudo é testado aqui antes); main = produção (só entra por PR vindo da dev).
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [dev, main]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+      - run: npm install && npx playwright install --with-deps chromium
+      - run: npm run test:e2e

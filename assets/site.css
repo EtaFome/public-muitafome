@@ -28,6 +28,31 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Arte de fundo: camada fixa atrás do conteúdo (background-attachment: fixed falha no iPhone).
+   Padrão repetido, então serve para qualquer largura de tela. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 -30vh 0; /* sobra embaixo para o parallax */
+  z-index: -1;
+  pointer-events: none;
+  background: url("bg-pattern.svg") 0 0 / 240px repeat;
+}
+@media (min-width: 768px) {
+  body::before { background-size: 320px; }
+}
+/* Parallax só com CSS: a arte desce mais devagar que a página. Sem suporte, ou com
+   "reduzir movimento" no sistema, o fundo fica parado. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body::before {
+      animation: bg-parallax linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+@keyframes bg-parallax { to { transform: translateY(-30vh); } }
+
 h1, h2, h3 { font-family: var(--brand); line-height: 1.1; margin: 0; letter-spacing: -0.02em; }
 a { color: var(--red-text); }
 :focus-visible { outline: 3px solid var(--st-delivery); outline-offset: 2px; }

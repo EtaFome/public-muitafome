@@ -40,6 +40,8 @@ assinatura mensal é confirmada — sem depender de um time comercial para aprov
 - Busca e filtro de estabelecimentos por nome/categoria, com indicação de loja aberta/fechada
 - Cardápio com categorias, itens, opções/variações (ex: tamanho, adicionais) e preço por escolha
 - Carrinho, endereço de entrega e cupom de desconto (percentual ou valor fixo)
+- Pagamento direto para a loja na entrega ou na retirada: dinheiro (com troco), cartão na maquininha ou PIX
+- Retirada no balcão, sem taxa de entrega, nas lojas que aceitam
 - Acompanhamento do pedido em tempo real (recebido → em preparo → saiu para entrega → concluído)
 - Histórico de pedidos com "pedir de novo"
 - Avaliação (nota + comentário) depois do pedido concluído
@@ -50,7 +52,8 @@ assinatura mensal é confirmada — sem depender de um time comercial para aprov
 - Fila de pedidos em tempo real, separada por categoria (Recebido, Em preparo, Saiu para
   entrega, Concluído)
 - Aceitar ou recusar pedido com motivo; cancelamento com motivo dos dois lados
-- Pedido só chega na fila da loja depois que o pagamento é confirmado
+- Pedido pago na entrega/retirada chega na fila na hora, com o que cobrar e o troco; pedido pago pelo app só chega depois que o pagamento é confirmado
+- Retirada no balcão opcional (liga em Configurações)
 - Gestão de cardápio (categorias, itens, disponibilidade, opções/variações)
 - Cupons de desconto e taxa de entrega configurável
 - Abrir/fechar a loja manualmente (cliente não consegue pedir de loja fechada)
@@ -101,21 +104,36 @@ npm install && npm run dev                                   # http://localhost:
 # 5. App (muitafome-mobile-client)
 npm install && npm start                                     # Expo Go, emulador ou web
 
-# 6. Site público (public-muitafome): HTML estático, abra index.html ou sirva a pasta
+# 6. Site público (public-muitafome): HTML estático, abra index.html ou sirva a pasta (testes: npm install && npm run test:e2e)
 #    index.html (escolha) → para-estabelecimentos.html (contratação) | para-clientes.html (app)
 ```
 
+## Fluxo de trabalho (branches)
+
+Todos os repositórios seguem o mesmo fluxo:
+
+```
+feature/minha-mudanca ──PR──▶ dev (homologação) ──PR──▶ main (produção)
+                               CI roda tudo           CI roda de novo
+```
+
+- **`dev`:** branch padrão. Toda mudança entra aqui por PR, e o CI roda os testes a cada push e PR.
+- **`main`:** o que está em produção. Só recebe PR vindo da `dev`, depois de o CI passar.
+- **Versões da API:** cada merge na `main` da API (CI verde) vira uma versão (`feat:` → 1.3.0, `fix:` → 1.2.1) com imagem em `ghcr.io/etafome/muitafome-api`. Os frontends não dependem das branches da API: o E2E de cada um sobe a imagem da versão do arquivo `api-version`. Para um front usar algo novo, a API sai primeiro e o front sobe o `api-version`.
+- **Compatibilidade da API:** mudanças aditivas e com valor padrão, para front antigo continuar funcionando; remover ou renomear campo leva duas versões (marca como obsoleto, depois remove).
+- **Proteção da `main`:** ligada neste repositório, que é público. Nos privados, a regra é de processo: o plano gratuito do GitHub não protege branch de repositório privado; com o plano Team dá para travar.
+
 ## Testes
 
-| Onde | Comando | O que cobre |
+| Repositório | Unitários (`npm test` / `npm run test:unit`) | E2E (`npm run test:e2e`) |
 |---|---|---|
-| API | `npm test` | 35 testes de integração contra um Postgres real (`muitafome_test`, recriado a cada execução): fluxo do pedido, tempo real, cupons e concorrência, IDOR, webhooks, LGPD, horário, raio de entrega, equipe, administração, imagens e expiração de pedidos |
-| Painel | `npm run test:e2e` | 7 E2E com Playwright: sobe a API (banco `muitafome_e2e`) e o painel em portas próprias; cadastro → cardápio → pedido ao vivo → avaliação, recusa com motivo, LGPD, sessão revogada, equipe, horário e administração |
-| Cliente web | `npm run test:e2e` | 5 E2E com Playwright no celular e no desktop contra a API real (build de produção): pedido completo de visitante a avaliação, cancelamento, LGPD, login/sessão e nenhuma página com rolagem horizontal em 360 px |
-| App | `npm run test:e2e` | 3 E2E com Playwright no build web do app (celular emulado) contra a API real: cadastro com consentimento, pedido com cupom e observação acompanhado ao vivo até a avaliação, cancelamento e exclusão de conta |
-| Os três | CI (`.github/workflows/ci.yml`) | typecheck, testes, build, E2E e `npm audit` a cada push/PR. O E2E do painel e do app faz checkout da API: com o repositório privado, crie o secret `API_REPO_TOKEN` |
+| API | 48 (regras de negócio e segurança, sem banco) + 77 de integração com Postgres real | — |
+| Painel | 15 (máscaras, erros, horário, status) | 15 cenários: pedido ao vivo, cardápio completo, cupons, configurações, senha, equipe, horário, administração, retirada paga na hora, segurança, LGPD |
+| Cliente web | 11 (carrinho, cupom, navegação, máscaras) | 13 cenários, no celular e no desktop, incluindo pagamento na entrega, retirada e 12 páginas sem rolagem lateral em 360 px |
+| App | 8 (carrinho, cupom, erros) | 8 cenários no build web do app, incluindo pagamento na entrega e retirada |
+| Site público | — | 7 cenários, no celular e no desktop: caminhos da página inicial, links quebrados, responsividade, páginas legais |
 
-Gestos e push nativos não são cobertos pelo E2E web; para isso, Maestro/Detox com o build nativo.
+Cada repositório tem no README a tabela "arquivo → o que cobre". O CI de todos roda em PR e em push na `dev` e na `main`.
 
 ## LGPD
 

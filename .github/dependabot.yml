@@ -1,0 +1,12 @@
+version: 2
+# Atualizações de segurança e versões semanais, em PR para a dev (homologação).
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule: { interval: weekly }
+    target-branch: dev
+    open-pull-requests-limit: 5
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule: { interval: monthly }
+    target-branch: dev

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+  <!-- Fundo do site público: desenhos de comida em traço, repetidos (ver body::before em site.css). -->
+  <g stroke="#2b1e1c" stroke-opacity=".07">
+    <!-- hambúrguer -->
+    <g transform="translate(34 40) rotate(-8)">
+      <path d="M4 30 Q34 -4 64 30 Z" />
+      <path d="M2 38 Q12 33 22 38 T42 38 T62 38 T70 37" />
+      <path d="M4 46 H64 Q64 58 52 58 H16 Q4 58 4 46 Z" />
+    </g>
+    <!-- copo com canudo -->
+    <g transform="translate(58 190) rotate(6)">
+      <path d="M0 18 H42 L36 78 H6 Z" />
+      <path d="M2 34 H40" />
+      <path d="M24 18 L32 -4 H42" />
+    </g>
+    <!-- garfo -->
+    <g transform="translate(250 186) rotate(24)">
+      <path d="M0 0 V22 Q0 32 10 32 Q20 32 20 22 V0 M10 0 V22 M10 32 V90" />
+    </g>
+    <!-- batata frita -->
+    <g transform="translate(150 230) rotate(-6)">
+      <path d="M6 12 L10 -14 M18 10 L20 -20 M30 10 L28 -16 M42 12 L38 -10" />
+      <path d="M0 10 H48 L42 52 H6 Z" />
+    </g>
+  </g>
+  <g stroke-opacity=".16">
+    <!-- fatia de pizza -->
+    <g transform="translate(176 30) rotate(12)" stroke="#e0651a">
+      <path d="M0 6 Q36 -8 72 6 L36 84 Z" />
+      <path d="M2 14 Q36 0 70 14" />
+      <circle cx="30" cy="30" r="5" />
+      <circle cx="46" cy="44" r="4" />
+      <circle cx="34" cy="58" r="3.5" />
+    </g>
+    <!-- faíscas de "pedido saindo" -->
+    <g stroke="#f01820">
+      <path d="M140 136 v12 M134 142 h12" />
+      <path d="M296 120 v8 M292 124 h8" />
+      <path d="M20 150 v8 M16 154 h8" />
+      <path d="M236 300 v10 M231 305 h10" />
+    </g>
+  </g>
+</svg>
